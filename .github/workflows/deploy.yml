@@ -10,7 +10,7 @@ permissions:
 jobs:
   build:
     name: Build Image
-    runs-on: [core-stage-arc-runner-amd64]
+    runs-on: [self-hosted, aws]
     environment: stage
     steps:
       - name: Checkout code
