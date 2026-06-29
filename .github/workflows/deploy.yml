@@ -8,10 +8,10 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build Image
-    runs-on: ubuntu-latest
-    environment: stage
+  build-and-push:
+    name: Build and Push Docker Image to ECR
+    runs-on: [ core-stage-arc-runner-amd64 ]
+    environment: prod
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
