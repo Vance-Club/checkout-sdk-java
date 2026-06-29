@@ -76,6 +76,13 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 
+javadoc {
+    // JDK 9+ doclint treats vendored-code HTML issues (e.g. RuntimeTypeAdapterFactory) as errors.
+    // Disable doclint and don't fail publishing on javadoc warnings.
+    options.addStringOption('Xdoclint:none', '-quiet')
+    failOnError = false
+}
+
 tasks.register('sourcesJar', Jar) {
     from sourceSets.main.allJava
     archiveClassifier = 'sources'
