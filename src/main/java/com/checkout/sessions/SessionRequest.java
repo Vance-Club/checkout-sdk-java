@@ -2,7 +2,8 @@ package com.checkout.sessions;
 
 import com.checkout.common.ChallengeIndicator;
 import com.checkout.common.Currency;
-import com.checkout.sessions.channel.BrowserSession;
+import com.checkout.common.CustomerRequest;
+import com.checkout.payments.sender.PaymentSender;
 import com.checkout.sessions.channel.ChannelData;
 import com.checkout.sessions.completion.CompletionInfo;
 import com.checkout.sessions.source.SessionCardSource;
@@ -81,6 +82,10 @@ public final class SessionRequest {
 
     @SerializedName("initial_transaction")
     private InitialTransaction initialTransaction;
+
+    private CustomerRequest customer;
+
+    private PaymentSender sender;
 
     /**
      * Details of the device from which the authentication originated.
