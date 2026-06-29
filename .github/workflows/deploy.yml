@@ -1,0 +1,32 @@
+name: Publishing checkout-fork-sdk on github packages
+on:
+  push:
+    branches: [ master, develop ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: [core-stage-arc-runner-amd64]
+    environment: stage
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Set up Gradle
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Build and publish JAR
+        run: |
+          ./gradlew clean build publish -x test
+        env:
+          GITHUB_USERNAME: ${{ secrets.ACTION_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
